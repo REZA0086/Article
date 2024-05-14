@@ -1,0 +1,14 @@
+{% extends 'parent/base.html' %}
+{% block title %}
+    صفحه ریکاوری پسورد
+{% endblock %}
+{% block content %}
+    <h1>recovery</h1>
+    <form action="{% url 'account:recovery_pass' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">ثبت</button>
+    </form>
+{% endblock %}
+
+    

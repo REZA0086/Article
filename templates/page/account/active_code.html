@@ -1,0 +1,12 @@
+{% extends 'parent/base.html' %}
+{% block title %}
+    صفحه کد تایید
+{% endblock %}
+{% block content %}
+    <h1>recovery</h1>
+    <form action="{% url 'account:active_code' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">ثبت</button>
+    </form>
+{% endblock %}
