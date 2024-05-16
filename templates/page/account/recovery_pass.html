@@ -1,14 +1,18 @@
 {% extends 'parent/base.html' %}
 {% block title %}
-    صفحه ریکاوری پسورد
+    بازیابی پسورد
 {% endblock %}
 {% block content %}
-    <h1>recovery</h1>
-    <form action="{% url 'account:recovery_pass' %}" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">ثبت</button>
-    </form>
-{% endblock %}
+    <section class="container p-5">
+        <form action="{% url 'account:recovery_pass' %}" class="row" method="post">
+            {% csrf_token %}
+            {{ form.user_phone }}
 
+            <div class="col-12">
+                <button class="btn btn-info py-2 px-3 " type="submit">ثبت</button>
+            </div>
+        </form>
+        <br>
+    </section>
+{% endblock %}
     

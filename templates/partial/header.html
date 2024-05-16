@@ -1,9 +1,3 @@
-<div class="loader-mask">
-    <div class="loader">
-        <div></div>
-    </div>
-</div>
-
 <!-- Bg Overlay -->
 <div class="content-overlay"></div>
 
@@ -21,52 +15,23 @@
     <nav class="sidenav__menu-container">
         <ul class="sidenav__menu" role="menubar">
             <li>
-                <a href="#" class="sidenav__menu-url">صفحه اصلی</a>
+                <a href="{% url 'main:index' %}" class="sidenav__menu-url">صفحه اصلی</a>
             </li>
             <li>
                 <a href="#" class="sidenav__menu-url">صفحات</a>
                 <button class="sidenav__menu-toggle" aria-haspopup="true" aria-label="Open dropdown"><i
                         class="ui-arrow-down"></i></button>
                 <ul class="sidenav__menu-dropdown">
-                    <li><a href="about.html" class="sidenav__menu-url">درباره ما</a></li>
-                    <li><a href="contact.html" class="sidenav__menu-url">تماس با ما</a></li>
-                    <li><a href="search-results.html" class="sidenav__menu-url">نتایج جستجو</a></li>
-                    <li><a href="categories.html" class="sidenav__menu-url">دسته بندی مطالب</a></li>
-                    <li><a href="single-post.html" class="sidenav__menu-url">نمایش مطلب</a></li>
-                    <li><a href="404.html" class="sidenav__menu-url">404</a></li>
+                    <li><a href="{% url 'main:about' %}" class="sidenav__menu-url">درباره ما</a></li>
+                    <li><a href="{% url 'main:contact' %}" class="sidenav__menu-url">تماس با ما</a></li>
                 </ul>
             </li>
 
             <!-- Categories -->
-            <li>
-                <a href="#" class="sidenav__menu-url">تکنولوژی</a>
-            </li>
-            <li>
-                <a href="#" class="sidenav__menu-url">زیبایی و سلامت</a>
-            </li>
-            <li>
-                <a href="#" class="sidenav__menu-url">موبایل</a>
-            </li>
         </ul>
     </nav>
 
-    <div class="socials sidenav__socials">
-        <a class="social social-facebook" href="#" target="_blank" aria-label="facebook">
-            <i class="ui-facebook"></i>
-        </a>
-        <a class="social social-twitter" href="#" target="_blank" aria-label="twitter">
-            <i class="ui-twitter"></i>
-        </a>
-        <a class="social social-google-plus" href="#" target="_blank" aria-label="google">
-            <i class="ui-google"></i>
-        </a>
-        <a class="social social-youtube" href="#" target="_blank" aria-label="youtube">
-            <i class="ui-youtube"></i>
-        </a>
-        <a class="social social-instagram" href="#" target="_blank" aria-label="instagram">
-            <i class="ui-instagram"></i>
-        </a>
-    </div>
+
 </header> <!-- end sidenav -->
 
 <main class="main oh" id="main">
@@ -79,32 +44,15 @@
                 <!-- Top menu -->
                 <div class="col-lg-6">
                     <ul class="top-menu">
-                        <li><a href="#">درباره ما</a></li>
-                        <li><a href="#">تبلیغات</a></li>
-                        <li><a href="#">تماس با ما</a></li>
+                        <li><a href="{% url 'main:about' %}">درباره ما</a></li>
+                        <li><a href="{% url 'main:contact' %}">تماس با ما</a></li>
+                        <li><a href="{% url 'account:login' %}">ورود</a></li>
+                        <li><a href="{% url 'account:register' %}">ثبت نام</a></li>
                     </ul>
                 </div>
 
                 <!-- Socials -->
-                <div class="col-lg-6">
-                    <div class="socials nav__socials socials--nobase socials--white justify-content-start">
-                        <a class="social social-facebook" href="#" target="_blank" aria-label="facebook">
-                            <i class="ui-facebook"></i>
-                        </a>
-                        <a class="social social-twitter" href="#" target="_blank" aria-label="twitter">
-                            <i class="ui-twitter"></i>
-                        </a>
-                        <a class="social social-google-plus" href="#" target="_blank" aria-label="google">
-                            <i class="ui-google"></i>
-                        </a>
-                        <a class="social social-youtube" href="#" target="_blank" aria-label="youtube">
-                            <i class="ui-youtube"></i>
-                        </a>
-                        <a class="social social-instagram" href="#" target="_blank" aria-label="instagram">
-                            <i class="ui-instagram"></i>
-                        </a>
-                    </div>
-                </div>
+
 
             </div>
         </div>
@@ -125,8 +73,8 @@
                     </button>
 
                     <!-- Logo -->
-                    <a href="index.html" class="logo">
-                        <img class="logo__img" src="img/logo_default.png" alt="logo">
+                    <a href="{% url 'main:index' %}" class="logo">
+                        <img style="width: 40px;height: 40px" class="logo__img" src="{{ site_settings.logo_url }}" alt="logo">
                     </a>
 
                     <!-- Nav-wrap -->
@@ -134,140 +82,38 @@
                         <ul class="nav__menu">
 
                             <li class="active">
-                                <a href="index.html">صفحه اصلی</a>
+                                <a href="{% url 'main:index' %}">صفحه اصلی</a>
                             </li>
-
-                            <li class="nav__dropdown">
-                                <a href="#">تکنولوژی</a>
-                                <ul class="nav__dropdown-menu nav__megamenu">
-                                    <li>
-                                        <div class="nav__megamenu-wrap">
-                                            <div class="row">
-
-                                                <div class="col nav__megamenu-item">
-                                                    <article class="entry">
-                                                        <div class="entry__img-holder">
-                                                            <a href="single-post.html">
-                                                                <img src="img/content/thumb/post-1.jpg" alt=""
-                                                                     class="entry__img">
-                                                            </a>
-                                                            <a href="categories.html"
-                                                               class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet">تکنولوژی</a>
-                                                        </div>
-
-                                                        <div class="entry__body">
-                                                            <h2 class="entry__title">
-                                                                <a href="single-post.html">چرا لانچرهای اندروید دیگر
-                                                                    محبوبیت گذشته را ندارند؟</a>
-                                                            </h2>
-                                                        </div>
-                                                    </article>
-                                                </div>
-
-                                                <div class="col nav__megamenu-item">
-                                                    <article class="entry">
-                                                        <div class="entry__img-holder">
-                                                            <a href="single-post.html">
-                                                                <img src="img/content/thumb/post-2.jpg" alt=""
-                                                                     class="entry__img">
-                                                            </a>
-                                                            <a href="categories.html"
-                                                               class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--purple">تکنولوژی</a>
-                                                        </div>
-
-                                                        <div class="entry__body">
-                                                            <h2 class="entry__title">
-                                                                <a href="single-post.html">نمایشگر وان پلاس ۷ قرار است
-                                                                    ما را شگفت‌زده کند!</a>
-                                                            </h2>
-                                                        </div>
-                                                    </article>
-                                                </div>
-
-                                                <div class="col nav__megamenu-item">
-                                                    <article class="entry">
-                                                        <div class="entry__img-holder">
-                                                            <a href="single-post.html">
-                                                                <img src="img/content/thumb/post-3.jpg" alt=""
-                                                                     class="entry__img">
-                                                            </a>
-                                                            <a href="categories.html"
-                                                               class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--blue">تکنولوژی</a>
-                                                        </div>
-
-                                                        <div class="entry__body">
-                                                            <h2 class="entry__title">
-                                                                <a href="single-post.html">با دو هزار یورو، می‌توان چه
-                                                                    محصولاتی دیگری به جای گلکسی فولد خرید؟</a>
-                                                            </h2>
-                                                        </div>
-                                                    </article>
-                                                </div>
-
-                                                <div class="col nav__megamenu-item">
-                                                    <article class="entry">
-                                                        <div class="entry__img-holder">
-                                                            <a href="single-post.html">
-                                                                <img src="img/content/thumb/post-4.jpg" alt=""
-                                                                     class="entry__img">
-                                                            </a>
-                                                            <a href="categories.html"
-                                                               class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--green">تکنولوژی</a>
-                                                        </div>
-
-                                                        <div class="entry__body">
-                                                            <h2 class="entry__title">
-                                                                <a href="single-post.html">۶ ویژگی برتر رابط کاربری One
-                                                                    UI سامسونگ</a>
-                                                            </h2>
-                                                        </div>
-                                                    </article>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul> <!-- end megamenu -->
-                            </li>
-
                             <li class="nav__dropdown">
                                 <a href="#">صفحات</a>
                                 <ul class="nav__dropdown-menu">
-                                    <li><a href="about.html">درباره ما</a></li>
-                                    <li><a href="contact.html">تماس با ما</a></li>
-                                    <li><a href="search-results.html">نتایج جستجو</a></li>
-                                    <li><a href="categories.html">دسته بندی مطالب</a></li>
-                                    <li><a href="single-post.html">نمایش مطلب</a></li>
-                                    <li><a href="404.html">404</a></li>
+                                    <li><a href="{% url 'main:about' %}">درباره ما</a></li>
+                                    <li><a href="{% url 'main:contact' %}">تماس با ما</a></li>
+                                    <li><a href="{% url 'account:login' %}">ورود</a></li>
+                                    <li><a href="{% url 'account:register' %}">ثبت نام</a></li>
                                 </ul>
                             </li>
-
-
                         </ul> <!-- end menu -->
                     </nav> <!-- end nav-wrap -->
-
                     <!-- Nav Right -->
                     <div class="nav__right">
-
                         <!-- Search -->
                         <div class="nav__right-item nav__search">
                             <a href="#" class="nav__search-trigger" id="nav__search-trigger">
                                 <i class="ui-search nav__search-trigger-icon"></i>
                             </a>
                             <div class="nav__search-box" id="nav__search-box">
-                                <form class="nav__search-form">
-                                    <input type="text" placeholder="جستجو مقالات" class="nav__search-input">
+                                <form class="nav__search-form" action="{% url 'main:search' %}">
+                                    <input type="text" placeholder="جستجو مقالات" class="nav__search-input" id="q"
+                                           name="q">
                                     <button type="submit" class="search-button btn btn-lg btn-color btn-button">
                                         <i class="ui-search nav__search-icon"></i>
                                     </button>
                                 </form>
                             </div>
                         </div>
-
                     </div> <!-- end nav right -->
-
                 </div> <!-- end flex-parent -->
             </div> <!-- end container -->
-
         </div>
     </header> 

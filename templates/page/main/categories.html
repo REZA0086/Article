@@ -1,0 +1,128 @@
+{% extends 'parent/base.html' %}
+{% block title %}
+    دسته بندی ها
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <ul class="breadcrumbs">
+            <li class="breadcrumbs__item">
+                <a href="{% url 'main:index' %}" class="breadcrumbs__url">خانه</a>
+            </li>
+            <li class="breadcrumbs__item">
+                <a href="{% url 'main:index' %}" class="breadcrumbs__url">اخبار</a>
+            </li>
+            <li class="breadcrumbs__item breadcrumbs__item--current">
+                تکنولوژی
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="main-container container" id="main-container">
+
+        <!-- Content -->
+        <div class="row">
+
+            <!-- Posts -->
+            <div class="col-lg-8 blog__content mb-72">
+                <h1 class="page-title">{{ category.name }}</h1>
+
+                <div class="row card-row">
+                    {% for blog in category.blog_category.all %}
+                        <div class="col-md-6">
+                            <article class="entry card">
+                                <div class="entry__img-holder card__img-holder">
+                                    <a href="{% url 'main:blog_detail' blog.id %}">
+                                        <div class="thumb-container thumb-70">
+                                            <img data-src="{{ blog.cover_image.url }}" src="{{ blog.cover_image.url }}"
+                                                 class="entry__img lazyload" alt="{{ blog.cover_alt }}"/>
+                                        </div>
+                                    </a>
+                                    <a href="{% url 'main:blog_detail' blog.id %}"
+                                       class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet">
+                                        {% for tag in blog.tag_blog.all %}
+                                            {{ tag.tag_name }}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+
+                                <div class="entry__body card__body">
+                                    <div class="entry__header">
+
+                                        <h2 class="entry__title">
+                                            <a href="{% url 'main:blog_detail' blog.id %}">{{ blog.title }}</a>
+                                        </h2>
+                                        <ul class="entry__meta">
+                                            <li class="entry__meta-author">
+                                                <span>نویسنده:</span>
+                                                <a>{{ blog.author }}</a>
+                                            </li>
+                                            <li class="entry__meta-date">
+                                                {{ blog.published_date }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="entry__excerpt">
+                                        <p>{{ blog.text | safe |linebreaksbr|truncatewords_html:30 }}</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div> <!-- end posts -->
+
+            <!-- Sidebar -->
+            <aside class="col-lg-4 sidebar sidebar--right">
+
+                <!-- Widget Popular Posts -->
+                <aside class="widget widget-popular-posts">
+                    <h4 class="widget-title">محبوب ترین مقالات</h4>
+                    <ul class="post-list-small">
+                        {% for blog in blog_view %}
+                            <li class="post-list-small__item">
+                                <article class="post-list-small__entry clearfix">
+                                    <div class="post-list-small__img-holder">
+                                        <div class="thumb-container thumb-100">
+                                            <a href="{% url 'main:blog_detail' blog.id %}">
+                                                <img data-src="{{ blog.cover_image.url }}" src="{{ blog.cover_image.url }}" alt="{{ blog.cover_alt }}"
+                                                     class="post-list-small__img--rounded lazyload">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="post-list-small__body">
+                                        <h3 class="post-list-small__entry-title">
+                                            <a href="{% url 'main:blog_detail' blog.id %}">{{ blog.title }}</a>
+                                        </h3>
+                                        <ul class="entry__meta">
+                                            <li class="entry__meta-author">
+                                                <span>نویسنده:</span>
+                                                <a>{{ blog.author }}</a>
+                                            </li>
+                                            <li class="entry__meta-date">
+                                                {{ blog.published_date }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </article>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+
+                </aside> <!-- end widget popular posts -->
+
+
+                <!-- Widget Ad 300 -->
+                <aside class="widget widget_media_image">
+                    <a>
+                        <img src="{{ media_url }}img/content/mag-1.jpg" alt="">
+                    </a>
+                </aside> <!-- end widget ad 300 -->
+
+            </aside> <!-- end sidebar -->
+
+        </div> <!-- end content -->
+    </div> <!-- end main container -->
+{% endblock %}

@@ -1,10 +1,117 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    {% block seo %}
+        
+    {% endblock %}
+
+    <title>{% block title %}
+    {% endblock %}</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,600,700%7CSource+Sans+Pro:400,600,700'
+          rel='stylesheet'>
+
+    <!-- Css -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/font-icons.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"/>
+    <script src="{% static 'js/lazysizes.min.js' %}"></script>
+
+
+    <!-- Favicons -->
+    <link href="https://eli-soft.ir/static/favicon.png" rel="shortcut icon"/>
+    <link href="{{ media_url }}img/apple-icon.png" rel="apple-touch-icon"/>
+
+
 </head>
-<body>
-$END$
+<body class="bg-light style-default style-rounded">
+
+
+{% include 'partial/header.html' %}
+<main class="main oh" id="main">
+    {% block content %}
+
+    {% endblock %}
+    <footer class="footer footer--light">
+        <div class="container">
+            <div class="footer__widgets">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6">
+                        <aside class="widget widget-logo">
+                            <a href="{% url 'main:index' %}">
+                                <img src="{{ site_setting.logo_url }}"
+                                     srcset="{{ site_setting.logo_url }} 1x, {{ site_setting.logo_url }} 2x"
+                                     class="logo__img" alt="">
+                            </a>
+                            <p class="copyright">
+
+                                {{ site_settings.text_footer|safe }}
+
+                            </p>
+                            <div class="socials socials--large socials--rounded mb-24">
+                                {% for social in social_media %}
+                                    <a href="{{ social.url }}" target="_blank" class="social"
+                                       title="{{ social.logo_title }}">
+                                        <img src="{{ social.logo_url }}">
+                                    </a>
+                                {% endfor %}
+
+
+                            </div>
+                        </aside>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6">
+                        <aside class="widget widget_nav_menu">
+                            <h4 class="widget-title">دسترسی سریع</h4>
+                            <ul>
+                                <li><a href="{% url 'main:about' %}">درباره ما</a></li>
+                                <li><a href="{% url 'main:contact' %}">تماس با ما</a></li>
+                                <li><a href="{% url 'account:login' %}">ورود</a></li>
+                                <li><a href="{% url 'account:register' %}">ثبت نام</a></li>
+
+                            </ul>
+                        </aside>
+                    </div>
+
+
+                </div>
+            </div>
+        </div> <!-- end container -->
+    </footer> <!-- end footer -->
+
+    <div id="back-to-top">
+        <a href="#top" aria-label="Go to top"><i class="ui-arrow-up"></i></a>
+    </div>
+
+</main>
+
+
+<script src="{% static 'js/jquery-3.5.1.js' %}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    {% if messages %}
+        {% for message in messages %}
+            toastr.{{ message.tags }}('{{ message }}')
+        {% endfor %}
+    {% endif %}
+</script>
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/easing.min.js' %}"></script>
+<script src="{% static 'js/owl-carousel.min.js' %}"></script>
+<script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
+<script src="{% static 'js/twitterFetcher_min.js' %}"></script>
+<script src="{% static 'js/jquery.newsTicker.min.js' %}"></script>
+<script src="{% static 'js/modernizr.min.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+
 </body>
 </html>

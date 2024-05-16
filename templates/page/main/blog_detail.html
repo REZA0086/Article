@@ -1,0 +1,252 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}
+    جزییات مقاله
+{% endblock %}
+{% block seo %}
+    {% if blog_seo.type == name %}
+        {% for seo in blog_seo %}
+            <meta name="{{ seo.title }}" content="{{ seo.content }}">
+        {% endfor %}
+    {% elif blog_seo.type == property %}
+        {% for seo in blog_seo %}
+            <meta property="{{ seo.title }}" content="{{ seo.content }}">
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <ul class="breadcrumbs">
+            <li class="breadcrumbs__item">
+                <a href="{% url 'main:index' %}" class="breadcrumbs__url">خانه</a>
+            </li>
+            <li class="breadcrumbs__item">
+                <a href="{% url 'main:index' %}" class="breadcrumbs__url">اخبار</a>
+            </li>
+            <li class="breadcrumbs__item breadcrumbs__item--current">
+                تکنولوژی
+            </li>
+        </ul>
+    </div>
+    <div class="main-container container" id="main-container">
+
+
+        <div class="row">
+
+            <div class="col-lg-8 blog__content mb-72">
+                <div class="content-box">
+
+                    <!-- standard post -->
+                    <article class="entry mb-0">
+
+                        <div class="single-post__entry-header entry__header">
+                            <a href="{% url 'main:category' blog.category.id %}"
+                               class="entry__meta-category entry__meta-category--label entry__meta-category--green">
+                                {{ blog.category }}
+                            </a>
+                            <h1 class="single-post__entry-title">
+                                {{ blog.title }}
+                            </h1>
+
+                            <div class="entry__meta-holder">
+                                <ul class="entry__meta">
+                                    <li class="entry__meta-author">
+                                        <span>نویسنده:</span>
+                                        <a>{{ blog.author }}</a>
+                                    </li>
+                                    <li class="entry__meta-date">
+                                        {{ blog.published_date }}
+                                    </li>
+                                </ul>
+
+                                <ul class="entry__meta">
+                                    <li class="entry__meta-views">
+                                        <i class="ui-eye"></i>
+                                        <span>{{ blog.view_count }}</span>
+                                    </li>
+                                    <li class="entry__meta-comments">
+                                        <a>
+                                            <i class="ui-chat-empty"></i>{{ comment_count }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> <!-- end entry header -->
+
+                        <div class="entry__img-holder">
+                            <img src="img/content/thumb/post-8.jpg" alt="" class="entry__img">
+                        </div>
+
+                        <div class="entry__article-wrap">
+
+
+                            <div class="entry__article">
+                                {{ blog.text | safe }}
+                            </div> <!-- end entry article -->
+                        </div> <!-- end entry article wrap -->
+                        <div class="entry__tags">
+                            <i class="ui-tags"></i>
+                            <span class="entry__tags-label">برچسب ها:</span>
+                            {% for tag in blog.tag_blog.all %}
+                                <a>{{ tag.tag_name }}</a>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Author -->
+                        <div class="entry-author clearfix">
+                            <img alt="" data-src="{{ blog.author.image.url }}" src="{{ blog.author.image.url }}"
+                                 class="avatar lazyload">
+                            <div class="entry-author__info">
+                                <h6 class="entry-author__name">
+                                    <a>{{ blog.author }}</a>
+                                </h6>
+                                <p class="mb-0">{{ blog.author.description | safe }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Related Posts -->
+                        <section class="section related-posts mt-40 mb-0">
+                            <div class="title-wrap title-wrap--line">
+                                <h3 class="section-title">مطالب مرتبط</h3>
+                            </div>
+
+                            <!-- Slider -->
+                            <div id="owl-posts-3-items" class="owl-carousel owl-theme owl-carousel--arrows-outside">
+                                {% for blog in blog_category %}
+                                    <article class="entry thumb thumb--size-1">
+                                        <div class="entry__img-holder thumb__img-holder"
+                                             style="background-image: url({{ blog.cover_image.url }});">
+                                            <div class="bottom-gradient"></div>
+                                            <div class="thumb-text-holder">
+                                                <h2 class="thumb-entry-title">
+                                                    <a href="{% url 'main:blog_detail' blog.id %}">{{ blog.title }}</a>
+                                                </h2>
+                                            </div>
+                                            <a href="{% url 'main:blog_detail' blog.id %}" class="thumb-url"></a>
+                                        </div>
+                                    </article>
+                                {% endfor %}
+                            </div> <!-- end slider -->
+
+                        </section> <!-- end related posts -->
+
+                    </article> <!-- end standard post -->
+
+                    <!-- Comments -->
+                    <div class="entry-comments">
+                        <div class="title-wrap title-wrap--line">
+                            {% if comment_count > 0 %}
+                                <h3 class="section-title">{{ comment_count }} دیدگاه</h3>
+                            {% else %}
+                                <h3 class="section-title">فعلا دیدگاهی وجود ندارد</h3>
+                            {% endif %}
+
+                        </div>
+                        <ul class="comment-list">
+                            {% for comment in comments %}
+                                <li class="comment">
+                                    <div class="comment-body">
+                                        <div class="comment-avatar">
+                                            <img alt="" src="{{ comment.author.image.url }}">
+                                        </div>
+                                        <div class="comment-text">
+                                            <h6 class="comment-author">{{ comment.author }}</h6>
+                                            <div class="comment-metadata">
+                                                <a class="comment-date">{{ comment.published_date }}</a>
+                                            </div>
+                                            <p>{{ comment.title }}</p>
+                                            <p>{{ comment.comment | safe }}</p>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div> <!-- end comments -->
+
+                    <!-- Comment Form -->
+                    <div id="respond" class="comment-respond">
+                        <div class="title-wrap">
+                            <h5 class="comment-respond__title section-title">دیدگاه شما</h5>
+                        </div>
+                        <form id="form" class="comment-form" method="post"
+                              action="{% url 'main:blog_detail' blog.id %}">
+                            {% csrf_token %}
+                            <p class="comment-form-comment">
+                                <label for="comment">دیدگاه</label>
+                                {{ form_comment.comment }}
+                            </p>
+
+                            <div class="row row-20">
+                                <div class="col-lg-4">
+                                    <label for="name">عنوان: *</label>
+                                    {{ form_comment.title }}
+                                </div>
+
+                            </div>
+
+                            <p class="comment-form-submit">
+                                <button type="submit" class="btn btn-lg btn-color btn-button"
+                                >ارسال دیدگاه
+                                </button>
+                            </p>
+
+                        </form>
+                    </div> <!-- end comment form -->
+
+                </div> <!-- end content box -->
+            </div> <!-- end post content -->
+
+            <!-- Sidebar -->
+            <aside class="col-lg-4 sidebar sidebar--right">
+
+                <!-- Widget Popular Posts -->
+                <aside class="widget widget-popular-posts">
+                    <h4 class="widget-title">محبوب ترین مقالات</h4>
+                    <ul class="post-list-small">
+                        {% for blog in blog_view %}
+                            <li class="post-list-small__item">
+                                <article class="post-list-small__entry clearfix">
+                                    <div class="post-list-small__img-holder">
+                                        <div class="thumb-container thumb-100">
+                                            <a href="{% url 'main:blog_detail' blog.id %}">
+                                                <img data-src="{{ blog.cover_image.url }}"
+                                                     src="{{ blog.cover_image.url }}" alt="{{ blog.cover_alt }}"
+                                                     class="post-list-small__img--rounded lazyload">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="post-list-small__body">
+                                        <h3 class="post-list-small__entry-title">
+                                            <a href="{% url 'main:blog_detail' blog.id %}">{{ blog.title }}</a>
+                                        </h3>
+                                        <ul class="entry__meta">
+                                            <li class="entry__meta-author">
+                                                <span>نویسنده:</span>
+                                                <a>{{ blog.author }}</a>
+                                            </li>
+                                            <li class="entry__meta-date">
+                                                {{ blog.published_date }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </article>
+                            </li>
+                        {% endfor %}
+
+
+                    </ul>
+                </aside> <!-- end widget popular posts -->
+
+                <aside class="widget widget_media_image">
+                    <a>
+                        <img src="{{ media_url }}img/content/mag-1.jpg" alt="">
+                    </a>
+                </aside> <!-- end widget ad 300 -->
+
+
+            </aside> <!-- end sidebar -->
+
+        </div> <!-- end content -->
+    </div> <!-- end main container -->
+{% endblock %}

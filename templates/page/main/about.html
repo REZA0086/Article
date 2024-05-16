@@ -1,0 +1,33 @@
+{% extends 'parent/base.html' %}
+{% block title %}
+    درباره ما
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumbs -->
+    <div class="container">
+        <ul class="breadcrumbs">
+            <li class="breadcrumbs__item">
+                <a href="{% url 'main:index' %}" class="breadcrumbs__url">خانه</a>
+            </li>
+            <li class="breadcrumbs__item breadcrumbs__item--current">
+                درباره ما
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-container container" id="main-container">
+        <!-- post content -->
+        <div class="blog__content mb-72">
+            <h1 class="page-title">درباره ما</h1>
+            <img src="{{ media_url }}img/content/about/about_bg.jpg" class="page-featured-img">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="entry__article">
+                        {{ site_settings.about_us |safe }}
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end post content -->
+    </div> <!-- end main container -->
+{% endblock %}

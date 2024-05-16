@@ -9,12 +9,11 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+from os import path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -27,10 +26,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
+    'django_jalali',
+    'ckeditor',
+    'ckeditor_uploader',
+
+    'account.apps.AccountConfig',
+    'Blog.apps.BlogConfig',
+    'site_settings.apps.SiteSettingsConfig'
+    'main.apps.MainConfig',
+
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +62,8 @@ ROOT_URLCONF = 'Article.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates']
+        ,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,17 +78,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Article.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'article_db',
+        'USER': 'root',
+        'PASSWORD': 'Reza8686',
+        'OPTIONS': {
+            'autocommit': True
+        }
+
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -99,6 +112,34 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CKEDITOR_UPLOAD_PATH = 'ckeditor/upload_files/'
+CKEDITOR_STORAGE_BACKEND = 'django.core.files.storage.FileSystemStorage'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Image'],
+        ]
+    },
+    'special': {
+        'toolbar': 'Special',
+        'height': 200,
+        'toolbar': 'full',
+        'toolbar_Special': [
+            ['Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Image'],
+            ['CodeSnippet'],
+
+        ], 'extraPlugins': ','.join(['codesnippet', 'clipboard'])
+    },
+    'special_an': {
+        'toolbar': 'Special',
+        'height': 200,
+        'toolbar_Special': [
+            ['Bold'],
+            ['CodeSnippet'],
+        ], 'extraPlugins': ','.join(['codesnippet', 'clipboard'])
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -111,13 +152,19 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+
 STATIC_URL = 'static/'
+STATICFILES_DIRS = (path.join(BASE_DIR, 'static/'),)
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'account.CustomerUser'

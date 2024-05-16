@@ -1,0 +1,43 @@
+{% extends 'parent/base.html' %}
+{% block title %}
+    تماس با ما
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumbs -->
+    <div class="container">
+        <ul class="breadcrumbs">
+            <li class="breadcrumbs__item">
+                <a href="{% url 'main:index' %}" class="breadcrumbs__url">خانه</a>
+            </li>
+            <li class="breadcrumbs__item breadcrumbs__item--current">
+                تماس با ما
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-container container" id="main-container">
+        <!-- post content -->
+        <div class="blog__content mb-72">
+            <h1 class="page-title">تماس با ما</h1>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h4>با ما تماس بگیرید</h4>
+                    <p>{{ site_settings.text_contact|safe }}</p>
+                    <ul class="contact-items">
+                        <li class="contact-item">
+                            <address>{{ site_settings.address }}</address>
+                        </li>
+                        <li class="contact-item">{{ site_settings.phone_number }}</li>
+                        <li class="contact-item">{{ site_settings.email }}</li>
+                    </ul>
+
+                    <!-- Contact Form -->
+
+
+                </div>
+            </div>
+        </div> <!-- end post content -->
+    </div> <!-- end main container -->
+{% endblock %}

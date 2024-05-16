@@ -1,15 +1,23 @@
 {% extends 'parent/base.html' %}
 {% block title %}
-    صفحه ورود
+     ورود
 {% endblock %}
 {% block content %}
-    <h1>Login</h1>
-    <form action="{% url 'account:login' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_table }}
-        <button type="submit">ورود</button>
-    </form>
-    <a href="{% url 'account:recovery_pass' %}"><button>رمز عبور خود را فراموش کرده اید</button></a>
+    <section class="container p-5">
+        <form action="{% url 'account:login' %}" class="row" method="post">
+            {% csrf_token %}
+            {{ form.user_phone }}
+            {{ form.password }}
+            {{ form.active_code }}
+            <div class="col-12">
+                <button class="btn btn-info py-2 px-3 " type="submit">ورود</button>
+            </div>
+        </form>
+        <br>
+        <a href="{% url 'account:recovery_pass' %}">
+            رمز عبور خود را فراموش کرده اید
+        </a>
+    </section>
 {% endblock %}
 
 
