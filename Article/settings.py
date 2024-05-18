@@ -35,7 +35,7 @@ INSTALLED_APPS = [
 
     'account.apps.AccountConfig',
     'Blog.apps.BlogConfig',
-    'site_settings.apps.SiteSettingsConfig'
+    'site_settings.apps.SiteSettingsConfig',
     'main.apps.MainConfig',
 
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Blog.models import Blog, BlogSeo
+from Blog.models import *
 
 
 def active_blog(modeladmin, request, queryset):
@@ -27,3 +27,25 @@ class BlogAdmin(admin.ModelAdmin):
 @admin.register(BlogSeo)
 class BlogSeoAdmin(admin.ModelAdmin):
     list_display = ('title', 'content')
+
+
+@admin.register(BlogCategory)
+class BlogCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name','slug')
+
+@admin.register(CategorySeo)
+class CategorySeoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'type')
+
+@admin.register(BlogTag)
+class BlogTagAdmin(admin.ModelAdmin):
+    list_display = ('tag_name','is_active','blog')
+    list_editable = ['is_active']
+
+
+@admin.register(BlogComment)
+class BlogCommentAdmin(admin.ModelAdmin):
+    list_display = ('title','blog','author','is_active')
+    list_editable = ['is_active']
+
+

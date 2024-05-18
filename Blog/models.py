@@ -10,6 +10,7 @@ class BlogCategory(models.Model):
     picture = models.ImageField(upload_to='blog/category/', null=True, blank=True, verbose_name='تصویر دسته بندی')
     picture_alt = models.CharField(max_length=250, null=True, blank=True, verbose_name='متن جایگزین')
     picture_title = models.CharField(max_length=250, null=True, blank=True, verbose_name='عنوان تصویر')
+    created_date = jmodels.jDateField(default=jdatetime.date.today(), verbose_name='تاریخ ساخت')
     slug = models.SlugField()
 
     class Meta:

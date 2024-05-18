@@ -3,9 +3,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import View
 from Blog.models import *
 from Blog.forms import *
-from site_settings.models import *
+from site_settings.models import SiteSettings, SocialMedia
 from main.forms import ArticleForm
-
 from django.contrib import messages
 from main.models import MainSeo
 
@@ -24,8 +23,10 @@ class IndexView(View):
         blog_views = Blog.objects.filter(is_active=True).order_by('-view_count')[:10]
         tags = BlogTag.objects.filter(blog__in=blogs)
         categories = BlogCategory.objects.all()
+        category = BlogCategory.objects.all().order_by('-created_date')[:4]
+
         blog_category = []
-        for cate in categories:
+        for cate in category:
             for blog in blogs.filter(category=cate):
                 blog_category.append(blog)
         blog = Blog.objects.filter(is_active=True)[:4]
@@ -51,7 +52,8 @@ class IndexView(View):
             'top': top,
             'form': form,
             'site_settings': site_setting,
-            'main_seo': main_seo
+            'main_seo': main_seo,
+            'category_bottom':category
         }
         return render(request, self.template_name, context)
 
